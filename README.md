@@ -3,7 +3,6 @@
 > 將長篇 AI-RPG 對話紀錄離線蒸餾成「可驗證的記憶卡 YAML」，無需付費 API。  
 > Python 負責解析 / 切片與骨架生成；Codex（VS Code）負責語意摘要與記憶整理。
 
----
 ## ✨ Features
 
 - ✅ **完全離線 / 無付費 API**
@@ -13,7 +12,6 @@
 - ✅ 以「chunk → memory card」的方式穩定處理超長對話
 - ✅ 內建驗證流程，避免亂填 / schema drift / hallucination
 
----
 ## 📦 Repo Structure
 ```
 input/
@@ -37,7 +35,6 @@ verify.py                    # 依 schema 驗證 output YAML（讀取 schema.yam
 SKILL.md
 ```
 
----
 ## 🚀 Quick Start
 ### 1) 放入對話紀錄
 把你的 AI-RPG 對話 log 放在input資料夾中，重新命名為`raw_chat.txt`：
@@ -106,7 +103,6 @@ python verify.py
 - 哪個 YAML 檔案
 - 哪個欄位缺漏 / 格式錯誤 / schema 不符合
 
----
 
 ## 🧩 Flexible Schema（重要）
 
@@ -122,7 +118,6 @@ python verify.py
 
 > 結果：你不需要同步修改 `split.py` / `verify.py` 的欄位定義。
 
----
 
 ## 🛡️ Validation Policy（避免幻覺）
 
@@ -131,18 +126,6 @@ python verify.py
 - ❌ 不允許臆測未在 chunk 出現的資訊（避免 hallucination）  
 - ✅ 建議「引用 chunk 的關鍵句」作為 evidence
 
----
-
-## 🧾 Codex 指令（Memory Distillation Workflow）
-```bash
-請閱讀並遵守本專案的 @SKILL.md 、 @MemoryTemplate.txt 。 你現在是 RPG 記憶檔案管理員。
-
-Step 0 — 準備切片 確認 input/raw_chat.txt 存在且非空。 在終端機執行：python split.py 確認已產生 chunks/ch_0001.txt（以及 output/chapters/ch_0001.yaml skeleton）。
-
-Step 1 — 寫入記憶卡（本輪 10 份） 依照 MemoryTemplate.txt、schema.yaml 規則，將下列檔案逐一整理成記憶卡並填入同名 YAML（只修改既有欄位，不新增欄位、不臆測）： chunks/ch_0001.txt → output/chapters/ch_0001.yaml … chunks/ch_0010.txt → output/chapters/ch_0010.yaml
-
-Step 2 — 驗收 完成後在終端機執行：python verify.py，並貼出結果。 若有錯誤或缺漏，請指出是哪個檔案與原因。
-```
 ---
 
 ## 🔧 Troubleshooting
