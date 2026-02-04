@@ -1,4 +1,4 @@
-# Offline RPG Memory Distillation Skill（彈性 Schema、無 API）
+# Offline RPG Memory Distillation Skill
 
 > 將長篇 AI-RPG 對話紀錄離線蒸餾成「可驗證的記憶卡 YAML」，無需付費 API。  
 > Python 負責解析 / 切片與骨架生成；Codex（VS Code）負責語意摘要與記憶整理。
