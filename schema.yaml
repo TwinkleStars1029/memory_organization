@@ -1,0 +1,48 @@
+version: 1
+output_format: yaml
+
+# Single Source of Truth (SSoT)
+# Edit this file to change memory card fields / validation rules.
+# split.py and verify.py will follow this schema automatically.
+
+derived:
+  日期: from_first_turn_date_ymd_slash
+  時間: from_first_last_turn_time_range
+
+fields:
+  - name: 日期
+    type: string
+    required: true
+    pattern: '^\d{4}/\d{2}/\d{2}$'
+
+  - name: 時間
+    type: string
+    pattern: '^\d{2}:\d{2}:\d{2}(-\d{2}:\d{2}:\d{2})?$'
+
+  - name: 場景
+    type: string
+    non_empty: true
+
+  - name: 內容細節
+    type: list
+    non_empty_any: true
+    min_items: 1
+    max_items: 5
+
+  - name: 造成影響
+    type: list
+    non_empty_any: false
+    min_items: 1
+    max_items: 5
+
+  - name: 關鍵字
+    type: list
+    non_empty_any: true
+    min_items: 3
+    max_items: 8
+
+  - name: 現況結論
+    type: string
+    non_empty_any: true
+    non_empty: true
+    max_chars: 40
